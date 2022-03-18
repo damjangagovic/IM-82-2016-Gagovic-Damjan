@@ -21,6 +21,10 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
 
 public class SortFrame extends JFrame {
 
@@ -53,14 +57,19 @@ public class SortFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(95, 158, 160));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(95, 158, 160));
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
 		JButton addButton = new JButton("Add");
+		addButton.setBackground(new Color(220, 220, 220));
+		addButton.setForeground(new Color(105, 105, 105));
+		addButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RectangleDialog dialog = new RectangleDialog();
@@ -79,6 +88,9 @@ public class SortFrame extends JFrame {
 		});
 		
 		JButton sortButton = new JButton("Sort");
+		sortButton.setBackground(new Color(220, 220, 220));
+		sortButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		sortButton.setForeground(new Color(105, 105, 105));
 		sortButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Rectangle rectangle = null;
@@ -118,6 +130,9 @@ public class SortFrame extends JFrame {
 		panel.add(addButton);
 		
 		JButton deleteButton = new JButton("Delete");
+		deleteButton.setBackground(new Color(220, 220, 220));
+		deleteButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		deleteButton.setForeground(new Color(105, 105, 105));
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RectangleDialog dialog = new RectangleDialog();

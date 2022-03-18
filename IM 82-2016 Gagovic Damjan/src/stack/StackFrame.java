@@ -17,6 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import java.awt.Color;
+import javax.swing.UIManager;
+import java.awt.Font;
 
 public class StackFrame extends JFrame {
 
@@ -48,14 +51,20 @@ public class StackFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setForeground(new Color(0, 0, 0));
+		contentPane.setBackground(new Color(95, 158, 160));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(95, 158, 160));
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
 		JButton addButton = new JButton("Add");
+		addButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		addButton.setForeground(new Color(105, 105, 105));
+		addButton.setBackground(new Color(220, 220, 220));
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RectangleDialog dialog = new RectangleDialog();
@@ -75,6 +84,9 @@ public class StackFrame extends JFrame {
 		panel.add(addButton);
 		
 		JButton deleteButton = new JButton("Delete");
+		deleteButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		deleteButton.setForeground(new Color(105, 105, 105));
+		deleteButton.setBackground(new Color(220, 220, 220));
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RectangleDialog dialog = new RectangleDialog();

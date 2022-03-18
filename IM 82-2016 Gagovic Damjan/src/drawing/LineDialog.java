@@ -19,6 +19,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
+import java.awt.Font;
 
 public class LineDialog extends JDialog {
 
@@ -29,6 +30,9 @@ public class LineDialog extends JDialog {
 	private JTextField textFieldYep;
 	private Color color;
 	private boolean ok;
+	private JButton pickAcolorButton;
+	private JButton okButton;
+	private JButton cancelButton;
 	
 	/**
 	 * Launch the application.
@@ -135,9 +139,10 @@ public class LineDialog extends JDialog {
 	public LineDialog() {
 		setResizable(false);
 		setTitle("Line properties");
-		setBounds(100, 100, 440, 266);
+		setBounds(100, 100, 316, 275);
 		getContentPane().setLayout(new BorderLayout());
 		setModal(true);
+		contentPanel.setBackground(new Color(220, 220, 220));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		JLabel lblStartPoint = new JLabel("Start Point");
@@ -215,14 +220,20 @@ public class LineDialog extends JDialog {
 								.addComponent(lblYcoordinateEp, Alignment.TRAILING))
 							.addGap(26)
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(textFieldYep, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-								.addComponent(textFieldXep, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-								.addComponent(textFieldYsp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-								.addComponent(textFieldXsp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
+								.addGroup(Alignment.LEADING, gl_contentPanel.createSequentialGroup()
+									.addGap(10)
+									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(textFieldXep, Alignment.TRAILING)
+										.addComponent(textFieldYep, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)))
+								.addGroup(Alignment.LEADING, gl_contentPanel.createSequentialGroup()
+									.addGap(10)
+									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(textFieldXsp, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+										.addComponent(textFieldYsp, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)))))
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblStartPoint)))
-					.addGap(171))
+					.addGap(27))
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblEndPoint)
@@ -256,11 +267,13 @@ public class LineDialog extends JDialog {
 		contentPanel.setLayout(gl_contentPanel);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(220, 220, 220));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			buttonPane.setLayout(new MigLayout("", "[60][][][][][][][][][][47px][65px]", "[23px]"));
 			{
-				JButton pickAcolorButton = new JButton("Pick a color");
-				buttonPane.add(pickAcolorButton, "cell 0 0");
+				pickAcolorButton = new JButton("Pick a color");
+				pickAcolorButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+				pickAcolorButton.setForeground(new Color(245, 245, 245));
+				pickAcolorButton.setBackground(new Color(95, 158, 160));
 				pickAcolorButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						color = JColorChooser.showDialog(null, "Color picker", color);
@@ -268,7 +281,10 @@ public class LineDialog extends JDialog {
 				});
 			}
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
+				okButton.setBackground(new Color(95, 158, 160));
+				okButton.setForeground(new Color(245, 245, 245));
+				okButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 							setOk(true);
@@ -276,19 +292,43 @@ public class LineDialog extends JDialog {
 						}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton, "cell 10 0,alignx left,aligny top");
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancel");
+				cancelButton.setForeground(new Color(245, 245, 245));
+				cancelButton.setBackground(new Color(95, 158, 160));
+				cancelButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton, "cell 11 0,alignx left,aligny top");
 			}
+			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
+			gl_buttonPane.setHorizontalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(pickAcolorButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+						.addGap(26)
+						.addComponent(okButton)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(cancelButton)
+						.addGap(50))
+			);
+			gl_buttonPane.setVerticalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_buttonPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(cancelButton)
+							.addComponent(pickAcolorButton)
+							.addComponent(okButton))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+			);
+			buttonPane.setLayout(gl_buttonPane);
 		}
 	}
 

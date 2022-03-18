@@ -25,6 +25,15 @@ import java.awt.Dimension;
 import javax.swing.UIManager;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JToggleButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
 
 public class FrameDrawing extends JFrame {
 
@@ -46,6 +55,7 @@ public class FrameDrawing extends JFrame {
 			public void run() {
 				try {
 					FrameDrawing frame = new FrameDrawing();
+					frame.setMinimumSize(new Dimension(730, 400));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -100,7 +110,7 @@ public class FrameDrawing extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 333);
 		contentPane = new JPanel();
-		contentPane.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
+		contentPane.setBackground(new Color(95, 158, 160));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -108,18 +118,22 @@ public class FrameDrawing extends JFrame {
 		
 		
 		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setBorder(null);
-		buttonsPanel.setBackground(UIManager.getColor("CheckBoxMenuItem.selectionBackground"));
+		buttonsPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+		buttonsPanel.setBackground(new Color(95, 158, 160));
 		contentPane.add(buttonsPanel, BorderLayout.NORTH);
-		buttonsPanel.setLayout(new MigLayout("", "[128.00px][110px][360px]", "[36px]"));
 		
 		JPanel actions = new JPanel();
-		actions.setBackground(Color.WHITE);
-		buttonsPanel.add(actions, "cell 0 0,alignx left,aligny center");
+		actions.setForeground(new Color(0, 0, 0));
+		actions.setBorder(new EmptyBorder(0, 0, 0, 5));
+		actions.setBackground(new Color(95, 158, 160));
 		
 		tglbtnSelect = new JToggleButton("Select");
+		tglbtnSelect.setForeground(new Color(105, 105, 105));
+		tglbtnSelect.setBackground(new Color(220, 220, 220));
 		
 		tglbtnModify = new JToggleButton("Modify");
+		tglbtnModify.setForeground(new Color(105, 105, 105));
+		tglbtnModify.setBackground(new Color(220, 220, 220));
 		tglbtnModify.addMouseListener(new MouseAdapter() {
 		public void mouseClicked(MouseEvent arg0) {
 			if (panel.getSelected() != null) {
@@ -334,11 +348,15 @@ public class FrameDrawing extends JFrame {
 				JOptionPane.showMessageDialog(new JFrame(), "No shape has been selected!", "Error!",
 						JOptionPane.WARNING_MESSAGE);
 				
+			} if (tglbtnModify != null) {
+				tglbtnModify.setSelected(false);
 			}
 		}
 	});
 	
 		tglbtnDelete = new JToggleButton("Delete");
+		tglbtnDelete.setForeground(new Color(105, 105, 105));
+		tglbtnDelete.setBackground(new Color(220, 220, 220));
 		tglbtnDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -358,6 +376,8 @@ public class FrameDrawing extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(new JFrame(), "No shape has been selected!", "Error!",
 							JOptionPane.WARNING_MESSAGE);
+				} if (tglbtnDelete != null) {
+					tglbtnDelete.setSelected(false);
 				}
 
 			}
@@ -368,24 +388,37 @@ public class FrameDrawing extends JFrame {
 		actions.add(tglbtnDelete, "cell 2 0,alignx left,aligny top");
 		
 		JPanel shapes = new JPanel();
-		shapes.setBackground(Color.WHITE);
-		buttonsPanel.add(shapes, "cell 2 0,alignx left,aligny top");
+		shapes.setBorder(new EmptyBorder(0, 5, 0, 0));
+		shapes.setBackground(new Color(95, 158, 160));
 		shapes.setLayout(new MigLayout("", "[57px][51px][81px][59px][61px]", "[23px]"));
 		
 		tglbtnPoint = new JToggleButton("Point");
+		tglbtnPoint.setForeground(new Color(105, 105, 105));
+		tglbtnPoint.setBackground(new Color(220, 220, 220));
 		shapes.add(tglbtnPoint, "cell 0 0,alignx left,aligny top");
 		
 		tglbtnLine = new JToggleButton("Line");
+		tglbtnLine.setForeground(new Color(105, 105, 105));
+		tglbtnLine.setBackground(new Color(220, 220, 220));
 		shapes.add(tglbtnLine, "cell 1 0,alignx left,aligny top");
 		
 		tglbtnRectangle = new JToggleButton("Rectangle");
+		tglbtnRectangle.setForeground(new Color(105, 105, 105));
+		tglbtnRectangle.setBackground(new Color(220, 220, 220));
 		shapes.add(tglbtnRectangle, "cell 2 0,alignx left,aligny top");
 		
 		tglbtnCircle = new JToggleButton("Circle");
+		tglbtnCircle.setForeground(new Color(105, 105, 105));
+		tglbtnCircle.setBackground(new Color(220, 220, 220));
 		shapes.add(tglbtnCircle, "cell 3 0,alignx left,aligny top");
 		
 		tglbtnDonut = new JToggleButton("Donut");
+		tglbtnDonut.setForeground(new Color(105, 105, 105));
+		tglbtnDonut.setBackground(new Color(220, 220, 220));
 		shapes.add(tglbtnDonut, "cell 4 0,alignx left,aligny top");
+		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		buttonsPanel.add(actions);
+		buttonsPanel.add(shapes);
 		
 //		JPanel drawingPanel = new JPanel();
 //		drawingPanel.setBackground(Color.WHITE);

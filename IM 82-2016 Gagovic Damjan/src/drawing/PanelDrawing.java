@@ -83,6 +83,7 @@ public class PanelDrawing extends JPanel {
 				shapes.add(point);
 			}
 			frame.tglbtnSelect.setSelected(true);
+			frame.tglbtnPoint.setSelected(false);
 		}
 		else if (frame.getTglbtnLine()) {
 			LineDialog dialog = new LineDialog();
@@ -106,6 +107,7 @@ public class PanelDrawing extends JPanel {
 					shapes.add(line);
 				startPoint = null;
 				frame.tglbtnSelect.setSelected(true);
+				frame.tglbtnLine.setSelected(false);
 			}
 				
 		}
@@ -135,6 +137,7 @@ public class PanelDrawing extends JPanel {
 				}
 			}
 			frame.tglbtnSelect.setSelected(true);
+			frame.tglbtnRectangle.setSelected(false);
 		}
 		else if (frame.getTglbtnCircle()) {
 			Point center = new Point(e.getX(), e.getY());
@@ -163,6 +166,7 @@ public class PanelDrawing extends JPanel {
 				}
 			}
 			frame.tglbtnSelect.setSelected(true);
+			frame.tglbtnCircle.setSelected(false);
 		}
 		else if (frame.getTglbtnDonut()) {
 			Point center = new Point(e.getX(), e.getY());
@@ -178,7 +182,9 @@ public class PanelDrawing extends JPanel {
 					int outerRadius = Integer.parseInt(dialog.getTextFieldOuterRadius());
 					if (innerRadius > 0 && outerRadius > 0 && innerRadius < outerRadius) {
 						Donut donut = new Donut(center, outerRadius, innerRadius);
+						donut.setColor(dialog.getBorderColor());
 						donut.setInnerBorderColor(dialog.getBorderColor());
+						donut.setInnerColor(dialog.getInnerColor());
 						donut.setInnerCircleColor(dialog.getInnerColor());
 						shapes.add(donut);
 					} else {
@@ -192,6 +198,7 @@ public class PanelDrawing extends JPanel {
 				}
 			}
 			frame.tglbtnSelect.setSelected(true);
+			frame.tglbtnDonut.setSelected(false);
 		}
 		else if (selected != null) {
 			selected.setSelected(true);

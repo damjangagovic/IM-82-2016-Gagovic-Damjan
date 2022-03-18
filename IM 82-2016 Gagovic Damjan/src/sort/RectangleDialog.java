@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
+import java.awt.Color;
 
 public class RectangleDialog extends JDialog {
 
@@ -98,6 +99,7 @@ public class RectangleDialog extends JDialog {
 		setTitle("Rectangle properties");
 		setBounds(100, 100, 300, 242);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(220, 220, 220));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setModal(true);
 		setResizable(false);
@@ -170,9 +172,12 @@ public class RectangleDialog extends JDialog {
 		contentPanel.setLayout(gl_contentPanel);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(220, 220, 220));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("OK");
+				okButton.setForeground(new Color(245, 245, 245));
+				okButton.setBackground(new Color(95, 158, 160));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(getTextFieldXcoordinate().getText().isEmpty() || getTextFieldYcoordinate().getText().isEmpty() || getTextFieldHeight().getText().isEmpty() ||getTextFieldWidth().getText().isEmpty()) {
@@ -190,6 +195,8 @@ public class RectangleDialog extends JDialog {
 			}
 			{
 				cancelButton = new JButton("Cancel");
+				cancelButton.setForeground(new Color(245, 245, 245));
+				cancelButton.setBackground(new Color(95, 158, 160));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();

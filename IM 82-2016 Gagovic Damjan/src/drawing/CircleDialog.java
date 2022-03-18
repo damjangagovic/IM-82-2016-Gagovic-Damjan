@@ -19,6 +19,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
+import java.awt.Font;
 
 public class CircleDialog extends JDialog {
 
@@ -29,6 +30,10 @@ public class CircleDialog extends JDialog {
 	private Color borderColor;
 	private Color innerColor;
 	private boolean ok;
+	private JButton btnBorderColor;
+	private JButton btnInnerColor;
+	private JButton okButton;
+	private JButton cancelButton;
 
 	/**
 	 * Launch the application.
@@ -130,9 +135,10 @@ public class CircleDialog extends JDialog {
 	public CircleDialog() {
 		setResizable(false);
 		setTitle("Circle properties");
-		setBounds(100, 100, 429, 225);
+		setBounds(100, 100, 327, 266);
 		getContentPane().setLayout(new BorderLayout());
 		setModal(true);
+		contentPanel.setBackground(new Color(220, 220, 220));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		JLabel lblCenter = new JLabel("Center");
@@ -193,22 +199,21 @@ public class CircleDialog extends JDialog {
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblCenter))
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addGap(37)
-									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblXcoordinate)
-										.addComponent(lblYcoordinate)))
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblRadius, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)))
-							.addGap(26)
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldRadius, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldYcoordinate, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldXcoordinate, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(171, Short.MAX_VALUE))
+						.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPanel.createSequentialGroup()
+								.addGap(37)
+								.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblXcoordinate)
+									.addComponent(lblYcoordinate)))
+							.addGroup(gl_contentPanel.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(lblRadius, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))))
+					.addGap(41)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(textFieldRadius, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldYcoordinate, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldXcoordinate, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+					.addGap(56))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -227,33 +232,40 @@ public class CircleDialog extends JDialog {
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblRadius)
 						.addComponent(textFieldRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(100, Short.MAX_VALUE))
+					.addContainerGap(34, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(220, 220, 220));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			buttonPane.setLayout(new MigLayout("", "[][][][][][][][][47px][65px]", "[23px]"));
 			{
-				JButton btnBorderColor = new JButton("Border Color");
+				btnBorderColor = new JButton("Border Color");
+				btnBorderColor.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnBorderColor.setForeground(new Color(220, 220, 220));
+				btnBorderColor.setBackground(new Color(95, 158, 160));
 				btnBorderColor.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						borderColor = JColorChooser.showDialog(null, "Color picker", borderColor);
 					}
 				});
-				buttonPane.add(btnBorderColor, "cell 0 0");
 			}
 			{
-				JButton btnInnerColor = new JButton("Inner Color");
+				btnInnerColor = new JButton("Inner Color");
+				btnInnerColor.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnInnerColor.setForeground(new Color(220, 220, 220));
+				btnInnerColor.setBackground(new Color(95, 158, 160));
 				btnInnerColor.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						innerColor = JColorChooser.showDialog(null, "Color picker", innerColor);
 					}
 				});
-				buttonPane.add(btnInnerColor, "cell 1 0");
 			}
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
+				okButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+				okButton.setForeground(new Color(220, 220, 220));
+				okButton.setBackground(new Color(95, 158, 160));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 							setOk(true);
@@ -261,19 +273,50 @@ public class CircleDialog extends JDialog {
 						}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton, "cell 8 0,alignx left,aligny top");
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancel");
+				cancelButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+				cancelButton.setForeground(new Color(220, 220, 220));
+				cancelButton.setBackground(new Color(95, 158, 160));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton, "cell 9 0,alignx left,aligny top");
 			}
+			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
+			gl_buttonPane.setHorizontalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_buttonPane.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(btnInnerColor, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnBorderColor, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGap(41)
+						.addComponent(okButton)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(cancelButton)
+						.addGap(45))
+			);
+			gl_buttonPane.setVerticalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addGroup(gl_buttonPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_buttonPane.createSequentialGroup()
+								.addComponent(btnBorderColor)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnInnerColor))
+							.addGroup(gl_buttonPane.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(gl_buttonPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(okButton)
+									.addComponent(cancelButton))))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+			);
+			buttonPane.setLayout(gl_buttonPane);
 		}
 	}
 
